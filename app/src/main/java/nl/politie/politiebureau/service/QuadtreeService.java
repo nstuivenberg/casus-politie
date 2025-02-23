@@ -7,7 +7,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -19,15 +18,15 @@ public class QuadtreeService {
     @Inject
     private PolitiebureauDatabase politiebureauDatabase;
 
-    public Set<Pair<BigDecimal, BigDecimal>> findBureausWithinRange(BigDecimal latitude, BigDecimal longitude, BigDecimal radius) {
+    public Set<Pair<Double, Double>> findBureausWithinRange(double latitude, double longitude, double radius) {
         List<Map<String, Double>> result = quadtreeProducer
                 .getQuadtree()
-                .queryRange(latitude.doubleValue(), longitude.doubleValue(), radius.doubleValue());
+                .queryRange(latitude, longitude, radius);
 
         if(result.isEmpty()) return Collections.emptySet();
 
         return result.stream()
-                .map(map -> Pair.of(BigDecimal.valueOf(map.get("lat")), BigDecimal.valueOf(map.get("lon"))))
+                .map(map -> Pair.of(map.get("lat"), map.get("lon")))
                 .collect(Collectors.toSet());
     }
 
@@ -35,8 +34,8 @@ public class QuadtreeService {
     private void populateQuadtree() {
         politiebureauDatabase.findAll().forEach(politiebureauEntity -> quadtreeProducer.getQuadtree()
                 .insert(
-                        politiebureauEntity.getLatitude().doubleValue(),
-                        politiebureauEntity.getLongitude().doubleValue()
+                        politiebureauEntity.getLatitude(),
+                        politiebureauEntity.getLongitude()
                 ));
     }
 }

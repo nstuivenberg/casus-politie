@@ -9,8 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.when;
@@ -27,10 +25,10 @@ public class QuadtreeProducerTest {
     @Before
     public void setUp() {
         // Mock het gedrag van de politiebureauDatabase
-        when(politiebureauDatabase.getMinimalLatitude()).thenReturn(new BigDecimal("51.2786"));
-        when(politiebureauDatabase.getMinimalLongitude()).thenReturn(new BigDecimal("6.6272"));
-        when(politiebureauDatabase.getMaximalLatitude()).thenReturn(new BigDecimal("52.3786"));
-        when(politiebureauDatabase.getMaximalLongitude()).thenReturn(new BigDecimal("6.7272"));
+        when(politiebureauDatabase.getMinimalLatitude()).thenReturn(51.2786);
+        when(politiebureauDatabase.getMinimalLongitude()).thenReturn(6.6272);
+        when(politiebureauDatabase.getMaximalLatitude()).thenReturn(52.3786);
+        when(politiebureauDatabase.getMaximalLongitude()).thenReturn(6.7272);
     }
 
     @Test

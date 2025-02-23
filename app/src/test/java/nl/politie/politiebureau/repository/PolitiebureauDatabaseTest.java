@@ -6,7 +6,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -28,29 +27,25 @@ public class PolitiebureauDatabaseTest {
 
     @Test
     public void givenFullDatabase_shouldReturnMinLat() {
-        BigDecimal result = politiebureauDatabase.getMinimalLatitude();
-        assertNotNull(result);
-        assertEquals(new BigDecimal("50.8406"), result);
+        double result = politiebureauDatabase.getMinimalLatitude();
+        assertEquals(50.8406, result, 0.01);
     }
 
     @Test
     public void givenFullDatabase_shouldReturnMaxLat() {
-        BigDecimal result = politiebureauDatabase.getMaximalLatitude();
-        assertNotNull(result);
-        assertEquals(new BigDecimal("53.2167"), result);
+        double result = politiebureauDatabase.getMaximalLatitude();
+        assertEquals(53.2167, result, 0.01);
     }
 
     @Test
     public void givenFullDatabase_shouldReturnMinLon() {
-        BigDecimal result = politiebureauDatabase.getMinimalLongitude();
-        assertNotNull(result);
-        assertEquals(new BigDecimal("3.5908"), result);
+        double result = politiebureauDatabase.getMinimalLongitude();
+        assertEquals(3.5908, result, 0.01);
     }
 
     @Test
     public void givenFullDatabase_shouldReturnMaxLon() {
-        BigDecimal result = politiebureauDatabase.getMaximalLongitude();
-        assertNotNull(result);
-        assertEquals(new BigDecimal("6.9742"), result);
+        double result = politiebureauDatabase.getMaximalLongitude();
+        assertEquals(6.9742, result, 0.01);
     }
 }

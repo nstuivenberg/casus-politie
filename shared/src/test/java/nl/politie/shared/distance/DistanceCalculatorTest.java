@@ -5,9 +5,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -21,21 +18,21 @@ public class DistanceCalculatorTest {
 
     @Test
     public void givenIdenticalCoordinates_distanceShouldBeZero() {
-        BigDecimal lat = new BigDecimal("52.103543");
-        BigDecimal lon = new BigDecimal("5.089719");
+        double lat = 52.103543;
+        double lon = 5.089719;
 
-        assertEquals(new BigDecimal("0.0"), distanceCalculator.calculateDistance(lat, lon, lat, lon));
+        assertEquals(0.0, distanceCalculator.calculateDistance(lat, lon, lat, lon), 0.001);
 
         assertTrue(true);
     }
 
     @Test
     public void givenTwoCoordinatesFiveKmApart_shouldReturnFive() {
-        BigDecimal lat1 = new BigDecimal("52");
-        BigDecimal lon1 = new BigDecimal("4");
-        BigDecimal lat2 = new BigDecimal("52.0449661");
-        BigDecimal lon2 = new BigDecimal("4");
+        double lat1 = 52;
+        double lon1 = 4;
+        double lat2 = 52.044966;
+        double lon2 = 4;
 
-        assertEquals(new BigDecimal("5.0"), distanceCalculator.calculateDistance(lat1, lon1, lat2, lon2).setScale(1, RoundingMode.HALF_UP));
+        assertEquals(5.0, distanceCalculator.calculateDistance(lat1, lon1, lat2, lon2), 0.001);
     }
 }

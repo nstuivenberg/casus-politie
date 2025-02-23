@@ -7,8 +7,6 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 @ApplicationScoped
 public class QuadtreeProducer {
@@ -47,18 +45,18 @@ public class QuadtreeProducer {
      */
     @PostConstruct
     public void init() {
-        BigDecimal minLat = politiebureauDatabase.getMinimalLatitude();
-        BigDecimal minLon = politiebureauDatabase.getMinimalLongitude();
-        BigDecimal maxLat = politiebureauDatabase.getMaximalLatitude();
-        BigDecimal maxLon = politiebureauDatabase.getMaximalLongitude();
+        double minLat = politiebureauDatabase.getMinimalLatitude();
+        double minLon = politiebureauDatabase.getMinimalLongitude();
+        double maxLat = politiebureauDatabase.getMaximalLatitude();
+        double maxLon = politiebureauDatabase.getMaximalLongitude();
 
-        BigDecimal centerLatitude = (minLat.add(maxLat)).divide(BigDecimal.valueOf(2), RoundingMode.HALF_UP);
-        BigDecimal centerLongitude = (minLon.add(maxLon)).divide(BigDecimal.valueOf(2), RoundingMode.HALF_UP);
+        double centerLatitude = (minLat + maxLat) / 2;
+        double centerLongitude = (minLon + maxLon) / 2;
 
-        BigDecimal height = maxLat.subtract(minLat);
-        BigDecimal width = maxLon.subtract(minLon);
+        double height = maxLat - minLat;
+        double width = maxLon - minLon;
 
-        this.quadtree = new Quadtree(centerLatitude.doubleValue(), centerLongitude.doubleValue(), width.doubleValue(), height.doubleValue());
+        this.quadtree = new Quadtree(centerLatitude, centerLongitude, width, height);
     }
 
     @Produces

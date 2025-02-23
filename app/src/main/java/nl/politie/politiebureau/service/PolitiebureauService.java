@@ -8,7 +8,6 @@ import org.apache.commons.lang3.tuple.Pair;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,27 +21,26 @@ public class PolitiebureauService {
     @Inject
     private QuadtreeService quadtreeService;
 
-    public List<PolitiebureauDTO> findBureausWithinRange(BigDecimal latitude, BigDecimal longitude, BigDecimal radius) {
+    public List<PolitiebureauDTO> findBureausWithinRange(double latitude, double longitude, double radius) {
         List<PolitiebureauEntity> politiebureauEntities = database.findAll();
 
         return politiebureauEntities.stream()
                 .filter(politiebureauEntity ->
                         distanceCalculator.produceDistanceCalculator().calculateDistance(
                                 latitude, longitude, politiebureauEntity.getLatitude(), politiebureauEntity.getLongitude()
-                        )
-                                .compareTo(radius) <= 0)
+                        ) <= radius)
                 .map(entity -> PolitiebureauDTO
                         .builder()
                         .name(entity.getName())
                         .plaats(entity.getPlaats())
-                        .latitude(entity.getLatitude().toString())
-                        .longitude(entity.getLongitude().toString())
+                        .latitude(String.valueOf(entity.getLatitude()))
+                        .longitude(String.valueOf(entity.getLongitude()))
                         .build())
                 .collect(Collectors.toList());
     }
 
-    public List<PolitiebureauDTO> findBureausWithinRangeFast(BigDecimal latitude, BigDecimal longitude, BigDecimal radius) {
-        Set<Pair<BigDecimal, BigDecimal>> coordinateSet = quadtreeService.findBureausWithinRange(
+    public List<PolitiebureauDTO> findBureausWithinRangeFast(double latitude, double longitude, double radius) {
+        Set<Pair<Double, Double>> coordinateSet = quadtreeService.findBureausWithinRange(
                 latitude, longitude, radius
         );
 
@@ -54,8 +52,8 @@ public class PolitiebureauService {
                         .builder()
                         .name(entity.getName())
                         .plaats(entity.getPlaats())
-                        .latitude(entity.getLatitude().toString())
-                        .longitude(entity.getLongitude().toString())
+                        .latitude(String.valueOf(entity.getLatitude()))
+                        .longitude(String.valueOf(entity.getLongitude()))
                         .build())
                 .collect(Collectors.toList());
     }

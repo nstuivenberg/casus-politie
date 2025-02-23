@@ -67,9 +67,9 @@ public class PolitiebureauResource {
 
         long startTime = System.nanoTime();
 
-        BigDecimal latitude = validateInput(latitudeString, "latitude");
-        BigDecimal longitude = validateInput(longitudeString, "longitude");
-        BigDecimal radius = validateInput(radiusString, "radius");
+        double latitude = validateInput(latitudeString, "latitude");
+        double longitude = validateInput(longitudeString, "longitude");
+        double radius = validateInput(radiusString, "radius");
 
         PolitiebureausDTO result = PolitiebureausDTO
                 .builder()
@@ -120,9 +120,9 @@ public class PolitiebureauResource {
         log.info("Start verwerking van getBureausWithinRangeFast.");
         long startTime = System.nanoTime();
 
-        BigDecimal latitude = validateInput(latitudeString, "latitude");
-        BigDecimal longitude = validateInput(longitudeString, "longitude");
-        BigDecimal radius = validateInput(radiusString, "radius");
+        double latitude = validateInput(latitudeString, "latitude");
+        double longitude = validateInput(longitudeString, "longitude");
+        double radius = validateInput(radiusString, "radius");
 
         PolitiebureausDTO result = PolitiebureausDTO
                 .builder()
@@ -146,9 +146,9 @@ public class PolitiebureauResource {
      * @return De gecontroleerde waarde als een {@link BigDecimal}.
      * @throws InvalidInputException Wanneer de invoer geen geldig getal is, wordt een Exception gegooid met een gedetailleerde foutmelding.
      */
-    BigDecimal validateInput(String input, String value) {
+    double validateInput(String input, String value) {
         try {
-            return new BigDecimal(input.trim().replace(",", "."));
+            return Double.parseDouble(input.trim().replace(",", "."));
         } catch (NumberFormatException e) {
             log.error("Fout bij het verwerken van {}: {}", value, e.getMessage());
             throw new InvalidInputException(

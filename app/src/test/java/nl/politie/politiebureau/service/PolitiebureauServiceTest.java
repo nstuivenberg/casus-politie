@@ -13,11 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 import static org.junit.Assert.*;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyDouble;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -41,8 +40,8 @@ public class PolitiebureauServiceTest {
     @Before
     public void setUp() {
         List<PolitiebureauEntity> politiebureauEntities = Arrays.asList(
-                new PolitiebureauEntity("Bureau 1", "Stad 1", new BigDecimal("52.3786"), new BigDecimal("6.6272")),
-                new PolitiebureauEntity("Bureau 2", "Stad 2", new BigDecimal("51.2786"), new BigDecimal("6.7272"))
+                new PolitiebureauEntity("Bureau 1", "Stad 1", 52.3786, 6.6272),
+                new PolitiebureauEntity("Bureau 2", "Stad 2", 51.2786, 6.7272)
         );
 
         when(database.findAll()).thenReturn(politiebureauEntities);
@@ -51,13 +50,13 @@ public class PolitiebureauServiceTest {
 
     @Test
     public void testFindBureausWithinRange() {
-        BigDecimal latitude = new BigDecimal("52.0000");
-        BigDecimal longitude = new BigDecimal("6.5000");
-        BigDecimal radius = new BigDecimal("10.0");
+        double latitude = 52.0000;
+        double longitude = 6.5000;
+        double radius = 10.0;
 
-        when(distanceCalculator.calculateDistance(any(), any(), any(), any()))
-                .thenReturn(new BigDecimal("5.0"))
-                .thenReturn(new BigDecimal("15.0"));
+        when(distanceCalculator.calculateDistance(anyDouble(), anyDouble(), anyDouble(), anyDouble()))
+                .thenReturn(5.0)
+                .thenReturn(15.0);
 
         List<PolitiebureauDTO> result = politiebureauService.findBureausWithinRange(latitude, longitude, radius);
 
@@ -69,12 +68,12 @@ public class PolitiebureauServiceTest {
 
     @Test
     public void testFindBureausWithinRangeFast() {
-        BigDecimal latitude = new BigDecimal("52.0000");
-        BigDecimal longitude = new BigDecimal("6.5000");
-        BigDecimal radius = new BigDecimal("10.0");
+        double latitude = 52.0000;
+        double longitude = 6.5000;
+        double radius = 10.0;
 
-        Set<Pair<BigDecimal, BigDecimal>> coordinateSet = new HashSet<>();
-        coordinateSet.add(Pair.of(new BigDecimal("52.3786"), new BigDecimal("6.6272")));
+        Set<Pair<Double, Double>> coordinateSet = new HashSet<>();
+        coordinateSet.add(Pair.of(52.3786, 6.6272));
 
         when(quadtreeService.findBureausWithinRange(latitude, longitude, radius)).thenReturn(coordinateSet);
 
@@ -86,12 +85,13 @@ public class PolitiebureauServiceTest {
         assertEquals("Stad 1", result.get(0).getPlaats());
     }
 
+
     @Test
     public void testFindBureausWithinRangeFastEmpty() {
-        BigDecimal latitude = new BigDecimal("52.0000");
-        BigDecimal longitude = new BigDecimal("6.5000");
-        BigDecimal radius = new BigDecimal("1.0");
-        Set<Pair<BigDecimal, BigDecimal>> coordinateSet = Collections.emptySet();
+        double latitude = 52.0000;
+        double longitude = 6.5000;
+        double radius = 1.0;
+        Set<Pair<Double, Double>> coordinateSet = Collections.emptySet();
 
         when(quadtreeService.findBureausWithinRange(latitude, longitude, radius)).thenReturn(coordinateSet);
 

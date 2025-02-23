@@ -13,7 +13,6 @@ import org.junit.runner.RunWith;
 import org.mockito.*;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -35,9 +34,9 @@ public class QuadtreeServiceTest {
 
     @Test
     public void givenTwoBureausWithinRange_shouldReturnListWithPairCoordinates() {
-        BigDecimal latitude = new BigDecimal("52.0000");
-        BigDecimal longitude = new BigDecimal("6.5000");
-        BigDecimal radius = new BigDecimal("10.0");
+        double latitude =52.0000;
+        double longitude = 6.5000;
+        double radius = 10.0;
 
         // Mock het gedrag van de quadtree queryRange
         List<Map<String, Double>> quadtreeResult = Arrays.asList(
@@ -52,25 +51,25 @@ public class QuadtreeServiceTest {
         );
         when(quadtree.queryRange(anyDouble(), anyDouble(), anyDouble())).thenReturn(quadtreeResult);
 
-        Set<Pair<BigDecimal, BigDecimal>> result = quadtreeService.findBureausWithinRange(latitude, longitude, radius);
+        Set<Pair<Double, Double>> result = quadtreeService.findBureausWithinRange(latitude, longitude, radius);
 
         assertNotNull(result);
         assertEquals(2, result.size());
 
-        assertTrue(result.contains(Pair.of(new BigDecimal("52.3786"), new BigDecimal("6.6272"))));
-        assertTrue(result.contains(Pair.of(new BigDecimal("51.2786"), new BigDecimal("6.7272"))));
+        assertTrue(result.contains(Pair.of(52.3786, 6.6272)));
+        assertTrue(result.contains(Pair.of(51.2786, 6.7272)));
     }
 
     @Test
     public void givenNoResult_shouldReturnEmptyCollection() {
-        BigDecimal latitude = new BigDecimal("52.0000");
-        BigDecimal longitude = new BigDecimal("6.5000");
-        BigDecimal radius = new BigDecimal("1.0");
+        double latitude = 52.0000;
+        double longitude = 6.5000;
+        double radius = 1.0;
 
         List<Map<String, Double>> quadtreeResult = Collections.emptyList();
         when(quadtree.queryRange(anyDouble(), anyDouble(), anyDouble())).thenReturn(quadtreeResult);
 
-        Set<Pair<BigDecimal, BigDecimal>> result = quadtreeService.findBureausWithinRange(latitude, longitude, radius);
+        Set<Pair<Double, Double>> result = quadtreeService.findBureausWithinRange(latitude, longitude, radius);
 
         assertNotNull(result);
         assertTrue(result.isEmpty());
