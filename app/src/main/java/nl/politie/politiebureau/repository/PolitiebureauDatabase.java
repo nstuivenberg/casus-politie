@@ -1,0 +1,283 @@
+package nl.politie.politiebureau.repository;
+
+import nl.politie.politiebureau.domain.PolitiebureauEntity;
+
+import javax.enterprise.context.ApplicationScoped;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+@ApplicationScoped
+public class PolitiebureauDatabase {
+
+    private static final List<PolitiebureauEntity> POLITIEBUREAUS = new ArrayList<>();
+
+    public List<PolitiebureauEntity> findAll() {
+        return new ArrayList<>(POLITIEBUREAUS);
+    }
+
+    public BigDecimal getMinimalLatitude() {
+        return POLITIEBUREAUS.stream()
+                .map(PolitiebureauEntity::getLatitude)
+                .min(BigDecimal::compareTo)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    public BigDecimal getMinimalLongitude() {
+        return POLITIEBUREAUS.stream()
+                .map(PolitiebureauEntity::getLongitude)
+                .min(BigDecimal::compareTo)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    public BigDecimal getMaximalLatitude() {
+        return POLITIEBUREAUS.stream()
+                .map(PolitiebureauEntity::getLatitude)
+                .max(BigDecimal::compareTo)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    public BigDecimal getMaximalLongitude() {
+        return POLITIEBUREAUS.stream()
+                .map(PolitiebureauEntity::getLongitude)
+                .max(BigDecimal::compareTo)
+                .orElse(BigDecimal.ZERO);
+    }
+
+    static {
+        POLITIEBUREAUS.addAll(
+                Arrays.asList(
+                        new PolitiebureauEntity("Politiebureau 1", "Aadorp", new BigDecimal("52.3786"), new BigDecimal("6.6272")),
+                        new PolitiebureauEntity("Politiebureau 2", "Aalsmeer", new BigDecimal("52.2667"), new BigDecimal("4.7500")),
+                        new PolitiebureauEntity("Politiebureau 3", "Aerdenhout", new BigDecimal("52.3644"), new BigDecimal("4.5972")),
+                        new PolitiebureauEntity("Politiebureau 4", "Alblasserdam", new BigDecimal("51.8702"), new BigDecimal("4.6667")),
+                        new PolitiebureauEntity("Politiebureau 5", "Alkmaar", new BigDecimal("52.6333"), new BigDecimal("4.7500")),
+                        new PolitiebureauEntity("Politiebureau 6", "Almelo", new BigDecimal("52.3500"), new BigDecimal("6.6667")),
+                        new PolitiebureauEntity("Politiebureau 7", "Almere", new BigDecimal("52.3667"), new BigDecimal("5.2167")),
+                        new PolitiebureauEntity("Politiebureau 8", "Alphen aan den Rijn", new BigDecimal("52.1333"), new BigDecimal("4.6667")),
+                        new PolitiebureauEntity("Politiebureau 9", "Amersfoort", new BigDecimal("52.1500"), new BigDecimal("5.3833")),
+                        new PolitiebureauEntity("Politiebureau 10", "Amstelveen", new BigDecimal("52.3000"), new BigDecimal("4.8500")),
+                        new PolitiebureauEntity("Politiebureau 11", "Amsterdam", new BigDecimal("52.3728"), new BigDecimal("4.8936")),
+                        new PolitiebureauEntity("Politiebureau 12", "Apeldoorn", new BigDecimal("52.2167"), new BigDecimal("5.9667")),
+                        new PolitiebureauEntity("Politiebureau 13", "Arnemuiden", new BigDecimal("51.5000"), new BigDecimal("3.6667")),
+                        new PolitiebureauEntity("Politiebureau 14", "Arnhem", new BigDecimal("51.9833"), new BigDecimal("5.9167")),
+                        new PolitiebureauEntity("Politiebureau 15", "Assen", new BigDecimal("53.0000"), new BigDecimal("6.5667")),
+                        new PolitiebureauEntity("Politiebureau 16", "Assendelft", new BigDecimal("52.4667"), new BigDecimal("4.7500")),
+                        new PolitiebureauEntity("Politiebureau 17", "Baarn", new BigDecimal("52.2167"), new BigDecimal("5.2833")),
+                        new PolitiebureauEntity("Politiebureau 18", "Badhoevedorp", new BigDecimal("52.3333"), new BigDecimal("4.7833")),
+                        new PolitiebureauEntity("Politiebureau 19", "Barendrecht", new BigDecimal("51.8500"), new BigDecimal("4.5333")),
+                        new PolitiebureauEntity("Politiebureau 20", "Beek", new BigDecimal("50.9333"), new BigDecimal("5.8000")),
+                        new PolitiebureauEntity("Politiebureau 21", "Bemmel", new BigDecimal("51.8917"), new BigDecimal("5.8958")),
+                        new PolitiebureauEntity("Politiebureau 22", "Bentveld", new BigDecimal("52.3658"), new BigDecimal("4.5717")),
+                        new PolitiebureauEntity("Politiebureau 23", "Berg en Dal", new BigDecimal("51.8167"), new BigDecimal("5.9167")),
+                        new PolitiebureauEntity("Politiebureau 24", "Berghem", new BigDecimal("51.7700"), new BigDecimal("5.5747")),
+                        new PolitiebureauEntity("Politiebureau 25", "Best", new BigDecimal("51.5167"), new BigDecimal("5.4000")),
+                        new PolitiebureauEntity("Politiebureau 26", "Beverwijk", new BigDecimal("52.4833"), new BigDecimal("4.6500")),
+                        new PolitiebureauEntity("Politiebureau 27", "Blaricum", new BigDecimal("52.2667"), new BigDecimal("5.2500")),
+                        new PolitiebureauEntity("Politiebureau 28", "Blerick", new BigDecimal("51.3667"), new BigDecimal("6.1500")),
+                        new PolitiebureauEntity("Politiebureau 29", "Boekelo", new BigDecimal("52.2044"), new BigDecimal("6.8019")),
+                        new PolitiebureauEntity("Politiebureau 30", "Bolnes", new BigDecimal("51.8947"), new BigDecimal("4.5788")),
+                        new PolitiebureauEntity("Politiebureau 31", "Born", new BigDecimal("51.0333"), new BigDecimal("5.8111")),
+                        new PolitiebureauEntity("Politiebureau 32", "Borne", new BigDecimal("52.3000"), new BigDecimal("6.7500")),
+                        new PolitiebureauEntity("Politiebureau 33", "Boskoop", new BigDecimal("52.0667"), new BigDecimal("4.6500")),
+                        new PolitiebureauEntity("Politiebureau 34", "Boukoul", new BigDecimal("51.2167"), new BigDecimal("6.0500")),
+                        new PolitiebureauEntity("Politiebureau 35", "Boven-Hardinxveld", new BigDecimal("51.8256"), new BigDecimal("4.8381")),
+                        new PolitiebureauEntity("Politiebureau 36", "Bovenkarspel", new BigDecimal("52.7000"), new BigDecimal("5.2500")),
+                        new PolitiebureauEntity("Politiebureau 37", "Breda", new BigDecimal("51.5889"), new BigDecimal("4.7758")),
+                        new PolitiebureauEntity("Politiebureau 38", "Brunssum", new BigDecimal("50.9500"), new BigDecimal("5.9667")),
+                        new PolitiebureauEntity("Politiebureau 39", "Bussum", new BigDecimal("52.2833"), new BigDecimal("5.1667")),
+                        new PolitiebureauEntity("Politiebureau 40", "Capelle aan den IJssel", new BigDecimal("51.9333"), new BigDecimal("4.5833")),
+                        new PolitiebureauEntity("Politiebureau 41", "Culemborg", new BigDecimal("51.9500"), new BigDecimal("5.2333")),
+                        new PolitiebureauEntity("Politiebureau 42", "De Kwakel", new BigDecimal("52.2408"), new BigDecimal("4.7908")),
+                        new PolitiebureauEntity("Politiebureau 43", "De Meern", new BigDecimal("52.0781"), new BigDecimal("5.0281")),
+                        new PolitiebureauEntity("Politiebureau 44", "Delft", new BigDecimal("52.0117"), new BigDecimal("4.3592")),
+                        new PolitiebureauEntity("Politiebureau 45", "Den Dolder", new BigDecimal("52.1064"), new BigDecimal("5.2403")),
+                        new PolitiebureauEntity("Politiebureau 46", "Deventer", new BigDecimal("52.2500"), new BigDecimal("6.1500")),
+                        new PolitiebureauEntity("Politiebureau 47", "Diemen", new BigDecimal("52.3333"), new BigDecimal("4.9667")),
+                        new PolitiebureauEntity("Politiebureau 48", "Diepenveen", new BigDecimal("52.2894"), new BigDecimal("6.1500")),
+                        new PolitiebureauEntity("Politiebureau 49", "Doesburg", new BigDecimal("52.0167"), new BigDecimal("6.1333")),
+                        new PolitiebureauEntity("Politiebureau 50", "Dongen", new BigDecimal("51.6333"), new BigDecimal("4.9333")),
+                        new PolitiebureauEntity("Politiebureau 51", "Dordrecht", new BigDecimal("51.7958"), new BigDecimal("4.6783")),
+                        new PolitiebureauEntity("Politiebureau 52", "Driehuis", new BigDecimal("52.4472"), new BigDecimal("4.6367")),
+                        new PolitiebureauEntity("Politiebureau 53", "Duivendrecht", new BigDecimal("52.3333"), new BigDecimal("4.9333")),
+                        new PolitiebureauEntity("Politiebureau 54", "Edam", new BigDecimal("52.5167"), new BigDecimal("5.0500")),
+                        new PolitiebureauEntity("Politiebureau 55", "Eindhoven", new BigDecimal("51.4333"), new BigDecimal("5.4833")),
+                        new PolitiebureauEntity("Politiebureau 56", "Elden", new BigDecimal("51.9667"), new BigDecimal("5.8833")),
+                        new PolitiebureauEntity("Politiebureau 57", "Ellecom", new BigDecimal("52.0333"), new BigDecimal("6.0833")),
+                        new PolitiebureauEntity("Politiebureau 58", "Emmen", new BigDecimal("52.7833"), new BigDecimal("6.9000")),
+                        new PolitiebureauEntity("Politiebureau 59", "Empel", new BigDecimal("51.7311"), new BigDecimal("5.3272")),
+                        new PolitiebureauEntity("Politiebureau 60", "Enkhuizen", new BigDecimal("52.7000"), new BigDecimal("5.3000")),
+                        new PolitiebureauEntity("Politiebureau 61", "Enschede", new BigDecimal("52.2167"), new BigDecimal("6.9000")),
+                        new PolitiebureauEntity("Politiebureau 62", "Etten-Leur", new BigDecimal("51.5667"), new BigDecimal("4.6333")),
+                        new PolitiebureauEntity("Politiebureau 63", "Geldrop", new BigDecimal("51.4222"), new BigDecimal("5.5578")),
+                        new PolitiebureauEntity("Politiebureau 64", "Geleen", new BigDecimal("50.9667"), new BigDecimal("5.8333")),
+                        new PolitiebureauEntity("Politiebureau 65", "Giesbeek", new BigDecimal("51.9944"), new BigDecimal("6.0694")),
+                        new PolitiebureauEntity("Politiebureau 66", "Glanerbrug", new BigDecimal("52.2150"), new BigDecimal("6.9742")),
+                        new PolitiebureauEntity("Politiebureau 67", "Gorinchem", new BigDecimal("51.8306"), new BigDecimal("4.9742")),
+                        new PolitiebureauEntity("Politiebureau 68", "Gouda", new BigDecimal("52.0111"), new BigDecimal("4.7111")),
+                        new PolitiebureauEntity("Politiebureau 69", "Goutum", new BigDecimal("53.1786"), new BigDecimal("5.8064")),
+                        new PolitiebureauEntity("Politiebureau 70", "Groningen", new BigDecimal("53.2167"), new BigDecimal("6.5667")),
+                        new PolitiebureauEntity("Politiebureau 71", "Grootebroek", new BigDecimal("52.7000"), new BigDecimal("5.2167")),
+                        new PolitiebureauEntity("Politiebureau 72", "Haalderen", new BigDecimal("51.8867"), new BigDecimal("5.9300")),
+                        new PolitiebureauEntity("Politiebureau 73", "Haarlem", new BigDecimal("52.3833"), new BigDecimal("4.6333")),
+                        new PolitiebureauEntity("Politiebureau 74", "Halsteren", new BigDecimal("51.5167"), new BigDecimal("4.2667")),
+                        new PolitiebureauEntity("Politiebureau 75", "Harderwijk", new BigDecimal("52.3500"), new BigDecimal("5.6167")),
+                        new PolitiebureauEntity("Politiebureau 76", "Hardinxveld-Giessendam", new BigDecimal("51.8167"), new BigDecimal("4.8333")),
+                        new PolitiebureauEntity("Politiebureau 77", "Heelsum", new BigDecimal("51.9822"), new BigDecimal("5.7525")),
+                        new PolitiebureauEntity("Politiebureau 78", "Heemskerk", new BigDecimal("52.5167"), new BigDecimal("4.6667")),
+                        new PolitiebureauEntity("Politiebureau 79", "Heemstede", new BigDecimal("52.3500"), new BigDecimal("4.6167")),
+                        new PolitiebureauEntity("Politiebureau 80", "Heer", new BigDecimal("50.8406"), new BigDecimal("5.7269")),
+                        new PolitiebureauEntity("Politiebureau 81", "Heerhugowaard", new BigDecimal("52.6667"), new BigDecimal("4.8333")),
+                        new PolitiebureauEntity("Politiebureau 82", "Heerlen", new BigDecimal("50.8833"), new BigDecimal("5.9833")),
+                        new PolitiebureauEntity("Politiebureau 83", "Heerlerbaan", new BigDecimal("50.8692"), new BigDecimal("6.0103")),
+                        new PolitiebureauEntity("Politiebureau 84", "Heiloo", new BigDecimal("52.6000"), new BigDecimal("4.7167")),
+                        new PolitiebureauEntity("Politiebureau 85", "Helden", new BigDecimal("51.3167"), new BigDecimal("6.0000")),
+                        new PolitiebureauEntity("Politiebureau 86", "Hellevoetsluis", new BigDecimal("51.8167"), new BigDecimal("4.1333")),
+                        new PolitiebureauEntity("Politiebureau 87", "Helmond", new BigDecimal("51.4833"), new BigDecimal("5.6500")),
+                        new PolitiebureauEntity("Politiebureau 88", "Hendrik-Ido-Ambacht", new BigDecimal("51.8500"), new BigDecimal("4.6333")),
+                        new PolitiebureauEntity("Politiebureau 89", "Hengelo", new BigDecimal("52.2656"), new BigDecimal("6.7931")),
+                        new PolitiebureauEntity("Politiebureau 90", "Hillegom", new BigDecimal("52.2833"), new BigDecimal("4.5833")),
+                        new PolitiebureauEntity("Politiebureau 91", "Hilversum", new BigDecimal("52.2333"), new BigDecimal("5.1667")),
+                        new PolitiebureauEntity("Politiebureau 92", "Hintham", new BigDecimal("51.7000"), new BigDecimal("5.3500")),
+                        new PolitiebureauEntity("Politiebureau 93", "Hoensbroek", new BigDecimal("50.9208"), new BigDecimal("5.9267")),
+                        new PolitiebureauEntity("Politiebureau 94", "Hoofddorp", new BigDecimal("52.3061"), new BigDecimal("4.6907")),
+                        new PolitiebureauEntity("Politiebureau 95", "Hoogkarspel", new BigDecimal("52.6947"), new BigDecimal("5.1778")),
+                        new PolitiebureauEntity("Politiebureau 96", "Hooglanderveen", new BigDecimal("52.1889"), new BigDecimal("5.4292")),
+                        new PolitiebureauEntity("Politiebureau 97", "Hoogvliet", new BigDecimal("51.8667"), new BigDecimal("4.3500")),
+                        new PolitiebureauEntity("Politiebureau 98", "Hoorn", new BigDecimal("52.6500"), new BigDecimal("5.0667")),
+                        new PolitiebureauEntity("Politiebureau 99", "Houten", new BigDecimal("52.0333"), new BigDecimal("5.1667")),
+                        new PolitiebureauEntity("Politiebureau 100", "Huissen", new BigDecimal("51.9333"), new BigDecimal("5.9333")),
+                        new PolitiebureauEntity("Politiebureau 101", "Huizen", new BigDecimal("52.3000"), new BigDecimal("5.2500")),
+                        new PolitiebureauEntity("Politiebureau 102", "IJmuiden", new BigDecimal("52.4586"), new BigDecimal("4.6194")),
+                        new PolitiebureauEntity("Politiebureau 103", "IJsselmonde", new BigDecimal("51.9000"), new BigDecimal("4.5500")),
+                        new PolitiebureauEntity("Politiebureau 104", "Ilpendam", new BigDecimal("52.4667"), new BigDecimal("4.9500")),
+                        new PolitiebureauEntity("Politiebureau 105", "Julianadorp", new BigDecimal("52.8833"), new BigDecimal("4.7333")),
+                        new PolitiebureauEntity("Politiebureau 106", "Katwijk", new BigDecimal("52.2000"), new BigDecimal("4.4167")),
+                        new PolitiebureauEntity("Politiebureau 107", "Kerkrade", new BigDecimal("50.8667"), new BigDecimal("6.0667")),
+                        new PolitiebureauEntity("Politiebureau 108", "Koog aan de Zaan", new BigDecimal("52.4667"), new BigDecimal("4.8000")),
+                        new PolitiebureauEntity("Politiebureau 109", "Kralingse Veer", new BigDecimal("51.9249"), new BigDecimal("4.5071")),
+                        new PolitiebureauEntity("Politiebureau 110", "Krimpen aan den IJssel", new BigDecimal("51.9167"), new BigDecimal("4.5833")),
+                        new PolitiebureauEntity("Politiebureau 111", "Krommenie", new BigDecimal("52.5000"), new BigDecimal("4.7667")),
+                        new PolitiebureauEntity("Politiebureau 112", "Kudelstaart", new BigDecimal("52.2339"), new BigDecimal("4.7483")),
+                        new PolitiebureauEntity("Politiebureau 113", "Kwintsheul", new BigDecimal("52.0167"), new BigDecimal("4.2500")),
+                        new PolitiebureauEntity("Politiebureau 114", "Landgraaf", new BigDecimal("50.9083"), new BigDecimal("6.0297")),
+                        new PolitiebureauEntity("Politiebureau 115", "Langedijk", new BigDecimal("52.6936"), new BigDecimal("4.7944")),
+                        new PolitiebureauEntity("Politiebureau 116", "Laren", new BigDecimal("52.2500"), new BigDecimal("5.2333")),
+                        new PolitiebureauEntity("Politiebureau 117", "Leeuwarden", new BigDecimal("53.2000"), new BigDecimal("5.7833")),
+                        new PolitiebureauEntity("Politiebureau 118", "Leiden", new BigDecimal("52.1600"), new BigDecimal("4.4900")),
+                        new PolitiebureauEntity("Politiebureau 119", "Leiderdorp", new BigDecimal("52.1667"), new BigDecimal("4.5333")),
+                        new PolitiebureauEntity("Politiebureau 120", "Leidschendam", new BigDecimal("52.0833"), new BigDecimal("4.4000")),
+                        new PolitiebureauEntity("Politiebureau 121", "Lelystad", new BigDecimal("52.5000"), new BigDecimal("5.4833")),
+                        new PolitiebureauEntity("Politiebureau 122", "Limbricht", new BigDecimal("51.0117"), new BigDecimal("5.8369")),
+                        new PolitiebureauEntity("Politiebureau 123", "Limmen", new BigDecimal("52.5667"), new BigDecimal("4.7000")),
+                        new PolitiebureauEntity("Politiebureau 124", "Lisse", new BigDecimal("52.2500"), new BigDecimal("4.5500")),
+                        new PolitiebureauEntity("Politiebureau 125", "Lonneker", new BigDecimal("52.2506"), new BigDecimal("6.9119")),
+                        new PolitiebureauEntity("Politiebureau 126", "Lutjebroek", new BigDecimal("52.6992"), new BigDecimal("5.2067")),
+                        new PolitiebureauEntity("Politiebureau 127", "Maarssen", new BigDecimal("52.1351"), new BigDecimal("5.0413")),
+                        new PolitiebureauEntity("Politiebureau 128", "Maassluis", new BigDecimal("51.9333"), new BigDecimal("4.2333")),
+                        new PolitiebureauEntity("Politiebureau 129", "Maastricht", new BigDecimal("50.8500"), new BigDecimal("5.6833")),
+                        new PolitiebureauEntity("Politiebureau 130", "Meteren", new BigDecimal("51.8639"), new BigDecimal("5.2825")),
+                        new PolitiebureauEntity("Politiebureau 131", "Middelburg", new BigDecimal("51.5000"), new BigDecimal("3.6167")),
+                        new PolitiebureauEntity("Politiebureau 132", "Mijdrecht", new BigDecimal("52.2000"), new BigDecimal("4.8667")),
+                        new PolitiebureauEntity("Politiebureau 133", "Molenhoek", new BigDecimal("51.7661"), new BigDecimal("5.8739")),
+                        new PolitiebureauEntity("Politiebureau 134", "Munstergeleen", new BigDecimal("50.9747"), new BigDecimal("5.8667")),
+                        new PolitiebureauEntity("Politiebureau 135", "Naaldwijk", new BigDecimal("51.9931"), new BigDecimal("4.2050")),
+                        new PolitiebureauEntity("Politiebureau 136", "Naarden", new BigDecimal("52.2953"), new BigDecimal("5.1622")),
+                        new PolitiebureauEntity("Politiebureau 137", "Neerbeek", new BigDecimal("50.9506"), new BigDecimal("5.8153")),
+                        new PolitiebureauEntity("Politiebureau 138", "Nieuw-Lekkerland", new BigDecimal("51.8833"), new BigDecimal("4.6833")),
+                        new PolitiebureauEntity("Politiebureau 139", "Nieuw-Vennep", new BigDecimal("52.2644"), new BigDecimal("4.6347")),
+                        new PolitiebureauEntity("Politiebureau 140", "Nieuwegein", new BigDecimal("52.0333"), new BigDecimal("5.0833")),
+                        new PolitiebureauEntity("Politiebureau 141", "Nieuwendam", new BigDecimal("52.3917"), new BigDecimal("4.9406")),
+                        new PolitiebureauEntity("Politiebureau 142", "Nieuwstadt", new BigDecimal("51.0333"), new BigDecimal("5.8667")),
+                        new PolitiebureauEntity("Politiebureau 143", "Nijkerkerveen", new BigDecimal("52.1950"), new BigDecimal("5.4667")),
+                        new PolitiebureauEntity("Politiebureau 144", "Nijmegen", new BigDecimal("51.8475"), new BigDecimal("5.8625")),
+                        new PolitiebureauEntity("Politiebureau 145", "Noordwijk", new BigDecimal("52.2333"), new BigDecimal("4.4333")),
+                        new PolitiebureauEntity("Politiebureau 146", "Nootdorp", new BigDecimal("52.0333"), new BigDecimal("4.4000")),
+                        new PolitiebureauEntity("Politiebureau 147", "Nuenen", new BigDecimal("51.4733"), new BigDecimal("5.5467")),
+                        new PolitiebureauEntity("Politiebureau 148", "Odijk", new BigDecimal("52.0503"), new BigDecimal("5.2333")),
+                        new PolitiebureauEntity("Politiebureau 149", "Oegstgeest", new BigDecimal("52.1833"), new BigDecimal("4.4667")),
+                        new PolitiebureauEntity("Politiebureau 150", "Oerle", new BigDecimal("51.4222"), new BigDecimal("5.3706")),
+                        new PolitiebureauEntity("Politiebureau 151", "Oldenzaal", new BigDecimal("52.3167"), new BigDecimal("6.9333")),
+                        new PolitiebureauEntity("Politiebureau 152", "Oosterhout", new BigDecimal("51.6431"), new BigDecimal("4.8569")),
+                        new PolitiebureauEntity("Politiebureau 153", "Oud-Beijerland", new BigDecimal("51.8167"), new BigDecimal("4.4000")),
+                        new PolitiebureauEntity("Politiebureau 154", "Oud-Vroenhoven", new BigDecimal("50.8478"), new BigDecimal("5.6514")),
+                        new PolitiebureauEntity("Politiebureau 155", "Oudshoorn", new BigDecimal("52.1333"), new BigDecimal("4.6667")),
+                        new PolitiebureauEntity("Politiebureau 156", "Overveen", new BigDecimal("52.3922"), new BigDecimal("4.6175")),
+                        new PolitiebureauEntity("Politiebureau 157", "Papendrecht", new BigDecimal("51.8333"), new BigDecimal("4.6833")),
+                        new PolitiebureauEntity("Politiebureau 158", "Pernis", new BigDecimal("51.8833"), new BigDecimal("4.3833")),
+                        new PolitiebureauEntity("Politiebureau 159", "Pijnacker", new BigDecimal("52.0167"), new BigDecimal("4.4333")),
+                        new PolitiebureauEntity("Politiebureau 160", "Poortugaal", new BigDecimal("51.8667"), new BigDecimal("4.4000")),
+                        new PolitiebureauEntity("Politiebureau 161", "Purmerend", new BigDecimal("52.5000"), new BigDecimal("4.9500")),
+                        new PolitiebureauEntity("Politiebureau 162", "Raamsdonksveer", new BigDecimal("51.6833"), new BigDecimal("4.8667")),
+                        new PolitiebureauEntity("Politiebureau 163", "Reuver", new BigDecimal("51.2850"), new BigDecimal("6.0792")),
+                        new PolitiebureauEntity("Politiebureau 164", "Ridderkerk", new BigDecimal("51.8667"), new BigDecimal("4.6000")),
+                        new PolitiebureauEntity("Politiebureau 165", "Rijen", new BigDecimal("51.5833"), new BigDecimal("4.9500")),
+                        new PolitiebureauEntity("Politiebureau 166", "Rijnsburg", new BigDecimal("52.1833"), new BigDecimal("4.4333")),
+                        new PolitiebureauEntity("Politiebureau 167", "Rijpwetering", new BigDecimal("52.2000"), new BigDecimal("4.5833")),
+                        new PolitiebureauEntity("Politiebureau 168", "Rijsenhout", new BigDecimal("52.2667"), new BigDecimal("4.7000")),
+                        new PolitiebureauEntity("Politiebureau 169", "Rijswijk", new BigDecimal("52.0456"), new BigDecimal("4.3300")),
+                        new PolitiebureauEntity("Politiebureau 170", "Roermond", new BigDecimal("51.2000"), new BigDecimal("5.9833")),
+                        new PolitiebureauEntity("Politiebureau 171", "Rosmalen", new BigDecimal("51.7167"), new BigDecimal("5.3667")),
+                        new PolitiebureauEntity("Politiebureau 172", "Rotterdam", new BigDecimal("51.9167"), new BigDecimal("4.5000")),
+                        new PolitiebureauEntity("Politiebureau 173", "Rozenburg", new BigDecimal("51.9058"), new BigDecimal("4.2486")),
+                        new PolitiebureauEntity("Politiebureau 174", "Santpoort-Noord", new BigDecimal("52.4225"), new BigDecimal("4.6261")),
+                        new PolitiebureauEntity("Politiebureau 175", "Santpoort-Zuid", new BigDecimal("52.4167"), new BigDecimal("4.6333")),
+                        new PolitiebureauEntity("Politiebureau 176", "Sassenheim", new BigDecimal("52.2258"), new BigDecimal("4.5225")),
+                        new PolitiebureauEntity("Politiebureau 177", "Schaesberg", new BigDecimal("50.9000"), new BigDecimal("6.0167")),
+                        new PolitiebureauEntity("Politiebureau 178", "Schagen", new BigDecimal("52.7833"), new BigDecimal("4.8000")),
+                        new PolitiebureauEntity("Politiebureau 179", "Scheveningen", new BigDecimal("52.1081"), new BigDecimal("4.2731")),
+                        new PolitiebureauEntity("Politiebureau 180", "Schiedam", new BigDecimal("51.9167"), new BigDecimal("4.4000")),
+                        new PolitiebureauEntity("Politiebureau 181", "Schoonhoven", new BigDecimal("51.9500"), new BigDecimal("4.8500")),
+                        new PolitiebureauEntity("Politiebureau 182", "Sittard", new BigDecimal("51.0000"), new BigDecimal("5.8667")),
+                        new PolitiebureauEntity("Politiebureau 183", "Sliedrecht", new BigDecimal("51.8167"), new BigDecimal("4.7667")),
+                        new PolitiebureauEntity("Politiebureau 184", "Soest", new BigDecimal("52.1833"), new BigDecimal("5.3000")),
+                        new PolitiebureauEntity("Politiebureau 185", "Soestdijk", new BigDecimal("52.1908"), new BigDecimal("5.2822")),
+                        new PolitiebureauEntity("Politiebureau 186", "Soesterberg", new BigDecimal("52.1194"), new BigDecimal("5.2831")),
+                        new PolitiebureauEntity("Politiebureau 187", "Spijkenisse", new BigDecimal("51.8500"), new BigDecimal("4.3333")),
+                        new PolitiebureauEntity("Politiebureau 188", "Stein", new BigDecimal("50.9667"), new BigDecimal("5.7667")),
+                        new PolitiebureauEntity("Politiebureau 189", "Surhuisterveen", new BigDecimal("53.1833"), new BigDecimal("6.1667")),
+                        new PolitiebureauEntity("Politiebureau 190", "Susteren", new BigDecimal("51.0667"), new BigDecimal("5.8667")),
+                        new PolitiebureauEntity("Politiebureau 191", "Teijlingen", new BigDecimal("52.2150"), new BigDecimal("4.5103")),
+                        new PolitiebureauEntity("Politiebureau 192", "Teteringen", new BigDecimal("51.6167"), new BigDecimal("4.8333")),
+                        new PolitiebureauEntity("Politiebureau 193", "The Hague", new BigDecimal("52.0800"), new BigDecimal("4.3100")),
+                        new PolitiebureauEntity("Politiebureau 194", "Tiel", new BigDecimal("51.8833"), new BigDecimal("5.4333")),
+                        new PolitiebureauEntity("Politiebureau 195", "Tilburg", new BigDecimal("51.5500"), new BigDecimal("5.0833")),
+                        new PolitiebureauEntity("Politiebureau 196", "Ubach over Worms", new BigDecimal("50.9167"), new BigDecimal("6.0500")),
+                        new PolitiebureauEntity("Politiebureau 197", "Uithoorn", new BigDecimal("52.2333"), new BigDecimal("4.8333")),
+                        new PolitiebureauEntity("Politiebureau 198", "Utrecht", new BigDecimal("52.0833"), new BigDecimal("5.1167")),
+                        new PolitiebureauEntity("Politiebureau 199", "Veenendaal", new BigDecimal("52.0167"), new BigDecimal("5.5500")),
+                        new PolitiebureauEntity("Politiebureau 200", "Veghel", new BigDecimal("51.6167"), new BigDecimal("5.5500")),
+                        new PolitiebureauEntity("Politiebureau 201", "Veldhoven", new BigDecimal("51.4200"), new BigDecimal("5.4050")),
+                        new PolitiebureauEntity("Politiebureau 202", "Velsen-Zuid", new BigDecimal("52.4667"), new BigDecimal("4.6167")),
+                        new PolitiebureauEntity("Politiebureau 203", "Vlaardingen", new BigDecimal("51.9000"), new BigDecimal("4.3500")),
+                        new PolitiebureauEntity("Politiebureau 204", "Vleuten", new BigDecimal("52.1081"), new BigDecimal("5.0150")),
+                        new PolitiebureauEntity("Politiebureau 205", "Vlijmen", new BigDecimal("51.6953"), new BigDecimal("5.2119")),
+                        new PolitiebureauEntity("Politiebureau 206", "Volendam", new BigDecimal("52.4994"), new BigDecimal("5.0675")),
+                        new PolitiebureauEntity("Politiebureau 207", "Voorschoten", new BigDecimal("52.1333"), new BigDecimal("4.4500")),
+                        new PolitiebureauEntity("Politiebureau 208", "Vught", new BigDecimal("51.6500"), new BigDecimal("5.3000")),
+                        new PolitiebureauEntity("Politiebureau 209", "Waalre", new BigDecimal("51.4000"), new BigDecimal("5.4667")),
+                        new PolitiebureauEntity("Politiebureau 210", "Waddinxveen", new BigDecimal("52.0500"), new BigDecimal("4.6500")),
+                        new PolitiebureauEntity("Politiebureau 211", "Wageningen", new BigDecimal("51.9667"), new BigDecimal("5.6667")),
+                        new PolitiebureauEntity("Politiebureau 212", "Weesp", new BigDecimal("52.3000"), new BigDecimal("5.0500")),
+                        new PolitiebureauEntity("Politiebureau 213", "West-Souburg", new BigDecimal("51.4650"), new BigDecimal("3.5908")),
+                        new PolitiebureauEntity("Politiebureau 214", "Westervoort", new BigDecimal("51.9667"), new BigDecimal("5.9667")),
+                        new PolitiebureauEntity("Politiebureau 215", "Zaandam", new BigDecimal("52.4333"), new BigDecimal("4.8333")),
+                        new PolitiebureauEntity("Politiebureau 216", "Zaandijk", new BigDecimal("52.4667"), new BigDecimal("4.8000")),
+                        new PolitiebureauEntity("Politiebureau 217", "Zaanstad", new BigDecimal("52.4697"), new BigDecimal("4.7767")),
+                        new PolitiebureauEntity("Politiebureau 218", "Zeist", new BigDecimal("52.0906"), new BigDecimal("5.2331")),
+                        new PolitiebureauEntity("Politiebureau 219", "Zevenaar", new BigDecimal("51.9167"), new BigDecimal("6.0667")),
+                        new PolitiebureauEntity("Politiebureau 220", "Zoetermeer", new BigDecimal("52.0667"), new BigDecimal("4.5000")),
+                        new PolitiebureauEntity("Politiebureau 221", "Zuid-Scharwoude", new BigDecimal("52.6833"), new BigDecimal("4.8167")),
+                        new PolitiebureauEntity("Politiebureau 222", "Zutphen", new BigDecimal("52.1400"), new BigDecimal("6.1950")),
+                        new PolitiebureauEntity("Politiebureau 223", "Zwaag", new BigDecimal("52.6679"), new BigDecimal("5.0757")),
+                        new PolitiebureauEntity("Politiebureau 224", "Zwammerdam", new BigDecimal("52.1058"), new BigDecimal("4.7272")),
+                        new PolitiebureauEntity("Politiebureau 225", "Zwanenburg", new BigDecimal("52.3833"), new BigDecimal("4.7500")),
+                        new PolitiebureauEntity("Politiebureau 226", "Zwijndrecht", new BigDecimal("51.8167"), new BigDecimal("4.6500")),
+                        new PolitiebureauEntity("Politiebureau 227", "Zwolle", new BigDecimal("52.5167"), new BigDecimal("6.1000")),
+                        new PolitiebureauEntity("Politiebureau 228", "’s-Gravenzande", new BigDecimal("52.0000"), new BigDecimal("4.1667")),
+                        new PolitiebureauEntity("Politiebureau 229", "’s-Hertogenbosch", new BigDecimal("51.6833"), new BigDecimal("5.3000"))
+                )
+        );
+    }
+}
